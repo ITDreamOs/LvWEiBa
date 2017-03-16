@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://npmcdn.com/basscss@8.0.1/css/basscss.min.css" media="all" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="style.css" media="all" title="no title" charset="utf-8">
+
+  </head>
+  <body>
+    <div id="main-container" class="clearfix">
+      <div class="col-12 mt4 clearfix">
+        <div class="col-10 right z1 relative" id="daijinquan">
+          <p class="absolute z2 price m0">￥20</p>
+          <img class="col-12 z1" src="image-daijinquan.png" alt="" />
+        </div>
+      </div>
+      <div class="col-12 mt3">
+          <form id="main-form" class="col-10 mx-auto border-box px2" action="index.html" method="post">
+            <input class="col-12 border-box p1 mt1 mb1 center h4" type="tel" name="tel" id="tel" placeholder="输入手机号领取奖品" value="">
+            <div class="relative">
+              <input class="col-12 border-box p1 mt1 mb1 pl2 h4" type="num" name="code" id="code" placeholder="输入验证码" value="">
+              <input class="col-7 absolute border-box mt1 py1 mb1 px2 h4" type="button" name="btn" id="btn" value="点击获取验证码" />
+            </div>
+            <a class="col-12 mt1 block" href="#" id="submit">
+              <img class="col-12" src="image-button.jpg" alt="" />
+            </a>
+          </form>
+      </div>
+    </div>
+    <script src="http://zeptojs.com/zepto.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      $(function () {
+        $('#btn').on("click", function (event) {
+          event.preventDefault();
+          var tel = $('#tel').val();
+          $.post('/path/to/file', {tel: tel}, function(data) {
+            // do something
+          });
+        })
+
+        $('#submit').on('click', function(event) {
+          event.preventDefault();
+          var tel = $('#tel').val();
+          var code = $('#code').val();
+          $.post('', {tel: tel, code: code}, function(data) {
+            // do something
+          });
+        });
+
+      })
+    </script>
+  </body>
+</html>

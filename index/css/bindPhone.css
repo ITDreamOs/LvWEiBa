@@ -1,0 +1,45 @@
+body {
+  background: url(../images/back.jpg) top center no-repeat;
+  background-size: cover;
+}
+
+.price {
+  font-size: 4.5rem;
+  left: calc(50% - 6.75rem);
+  top: 1rem;
+  font-weight: bolder;
+  color: #e79600;
+}
+
+#main-form, input {
+  border-radius: 2rem;
+  box-shadow: none;
+  border: none;
+}
+#btn {
+  background: #f2cc25;
+  top: 0;
+  right: 0;
+  color: #a19b9b;
+}
+
+@media (max-width: 320px) {
+  .price {
+    font-size: 3.5rem;
+    left: calc(50% - 5.25rem);
+  }
+  .h4 {
+    font-size: .75rem;
+  }
+}
+@media (min-width: 520px) {
+  .price {
+    font-size: 7.5rem;
+    left: calc(50% - 11.25rem);
+    top: 2rem;
+  }
+  #main-form input {
+    padding: 2rem;
+    font-size: 1.75rem;
+  }
+}

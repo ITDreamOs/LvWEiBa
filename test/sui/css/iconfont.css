@@ -1,0 +1,18 @@
+/*阿里巴巴矢量图标库--iconfont.cn*/
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_1462368660_7681775.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_1462368660_7681775.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_1462368660_7681775.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/font_1462368660_7681775.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_1462368660_7681775.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+                                                                                
+.iconfont {
+  font-family:"iconfont" !important;
+  /*font-size:0.8rem;*/
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}                 

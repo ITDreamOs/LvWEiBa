@@ -1,0 +1,146 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WeixinSys", "http://localhost:24462", "{7B35B91D-6515-4FB3-9B3E-EAB759097DBD}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{4218ed57-0b9c-4016-b446-dc205f28c660}|WeixinApiClass.dll;{7428067F-1EB5-449C-9062-2DB9BA76FD00}|BaseClassCommon.dll;{A113DF2C-D7ED-4C6E-A1CC-54143CAB3F08}|DBCLASSFORWEIXIN.dll;{7b90e1ba-5e78-4290-b80f-58354b76247d}|BaseClass.Dal.dll;{93CC6AEB-A7A9-4168-B6AB-CFCBF9C2F770}|BaseClass.Model.dll;{2cc4a0b6-63bc-4c72-9a94-3238ab3b495d}|LVWEIBA.dll;{fd61ef2d-f92a-4b93-80fa-ec02d87b556e}|tenpay.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_24462"
+		Debug.AspNetCompiler.PhysicalPath = "..\WeixinSys\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24462\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_24462"
+		Release.AspNetCompiler.PhysicalPath = "..\WeixinSys\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24462\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\WeixinSys\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeixinApiClass", "..\WeixinApiClass\WeixinApiClass.csproj", "{4218ED57-0B9C-4016-B446-DC205F28C660}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBCLASSFORWEIXIN", "..\DBCLASSFORWEIXIN\DBCLASSFORWEIXIN.csproj", "{A113DF2C-D7ED-4C6E-A1CC-54143CAB3F08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tenpay", "..\tenpay\tenpay.csproj", "{FD61EF2D-F92A-4B93-80FA-EC02D87B556E}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BaseClass.WebUi", "..\BaseClass0617\BaseClass.WebUi\", "{4ED138A0-6523-4310-8F85-FC35180A7407}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = ""
+		SccAuxPath = ""
+		SccLocalPath = ""
+		SccProvider = ""
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{7428067f-1eb5-449c-9062-2db9ba76fd00}|BaseClassCommon.dll;{2cc4a0b6-63bc-4c72-9a94-3238ab3b495d}|LVWEIBA.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/BaseClass.WebUi"
+		Debug.AspNetCompiler.PhysicalPath = "..\BaseClass0617\BaseClass.WebUi\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\BaseClass.WebUi\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/BaseClass.WebUi"
+		Release.AspNetCompiler.PhysicalPath = "..\BaseClass0617\BaseClass.WebUi\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\BaseClass.WebUi\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "6242"
+		VWDVirtualPath = "/"
+		SlnRelativePath = "..\BaseClass0617\BaseClass.WebUi\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+	ProjectSection(SvnOrigin) = preProject
+		@Keys = Enlist,Svn.Uri
+		Enlist = Required
+		Svn.Uri = BaseClass.WebUi/
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "文档", "文档", "{7540BBCD-615B-4993-9E66-1CE5A3902CD3}"
+	ProjectSection(SolutionItems) = preProject
+		..\app接口清单.xls = ..\app接口清单.xls
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseClass.Common", "..\BaseClass0617\BaseClassCommon\BaseClass.Common.csproj", "{7428067F-1EB5-449C-9062-2DB9BA76FD00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LVWEIBA", "..\BaseClass0617\LVWEIBA\LVWEIBA.csproj", "{2CC4A0B6-63BC-4C72-9A94-3238AB3B495D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7B90E1BA-5E78-4290-B80F-58354B76247D} = {7B90E1BA-5E78-4290-B80F-58354B76247D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseClass.Model", "..\BaseClass0617\BaseClass.Model\BaseClass.Model.csproj", "{93CC6AEB-A7A9-4168-B6AB-CFCBF9C2F770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseClass.Dal", "..\BaseClass0617\BaseClass.Dal\BaseClass.Dal.csproj", "{7B90E1BA-5E78-4290-B80F-58354B76247D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseClass.Bll", "..\BaseClass0617\BaseClass.Bll\BaseClass.Bll.csproj", "{DB9FBF26-2854-4291-AE1C-0CA45A3753F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LvWeiBa.WebAPI", "..\LvWeiBa.WebAPI\LvWeiBa.WebAPI.csproj", "{16780CE5-44FA-4E1B-80CC-621BD3062C3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B35B91D-6515-4FB3-9B3E-EAB759097DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B35B91D-6515-4FB3-9B3E-EAB759097DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B35B91D-6515-4FB3-9B3E-EAB759097DBD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B35B91D-6515-4FB3-9B3E-EAB759097DBD}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{4218ED57-0B9C-4016-B446-DC205F28C660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4218ED57-0B9C-4016-B446-DC205F28C660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4218ED57-0B9C-4016-B446-DC205F28C660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4218ED57-0B9C-4016-B446-DC205F28C660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A113DF2C-D7ED-4C6E-A1CC-54143CAB3F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A113DF2C-D7ED-4C6E-A1CC-54143CAB3F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A113DF2C-D7ED-4C6E-A1CC-54143CAB3F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A113DF2C-D7ED-4C6E-A1CC-54143CAB3F08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD61EF2D-F92A-4B93-80FA-EC02D87B556E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD61EF2D-F92A-4B93-80FA-EC02D87B556E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD61EF2D-F92A-4B93-80FA-EC02D87B556E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD61EF2D-F92A-4B93-80FA-EC02D87B556E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED138A0-6523-4310-8F85-FC35180A7407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED138A0-6523-4310-8F85-FC35180A7407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED138A0-6523-4310-8F85-FC35180A7407}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED138A0-6523-4310-8F85-FC35180A7407}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{7428067F-1EB5-449C-9062-2DB9BA76FD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7428067F-1EB5-449C-9062-2DB9BA76FD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7428067F-1EB5-449C-9062-2DB9BA76FD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7428067F-1EB5-449C-9062-2DB9BA76FD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC4A0B6-63BC-4C72-9A94-3238AB3B495D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC4A0B6-63BC-4C72-9A94-3238AB3B495D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC4A0B6-63BC-4C72-9A94-3238AB3B495D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC4A0B6-63BC-4C72-9A94-3238AB3B495D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93CC6AEB-A7A9-4168-B6AB-CFCBF9C2F770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93CC6AEB-A7A9-4168-B6AB-CFCBF9C2F770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93CC6AEB-A7A9-4168-B6AB-CFCBF9C2F770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93CC6AEB-A7A9-4168-B6AB-CFCBF9C2F770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B90E1BA-5E78-4290-B80F-58354B76247D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B90E1BA-5E78-4290-B80F-58354B76247D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B90E1BA-5E78-4290-B80F-58354B76247D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B90E1BA-5E78-4290-B80F-58354B76247D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB9FBF26-2854-4291-AE1C-0CA45A3753F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB9FBF26-2854-4291-AE1C-0CA45A3753F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB9FBF26-2854-4291-AE1C-0CA45A3753F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB9FBF26-2854-4291-AE1C-0CA45A3753F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16780CE5-44FA-4E1B-80CC-621BD3062C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16780CE5-44FA-4E1B-80CC-621BD3062C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16780CE5-44FA-4E1B-80CC-621BD3062C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16780CE5-44FA-4E1B-80CC-621BD3062C3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal
