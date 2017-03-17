@@ -18,10 +18,12 @@
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css" />
     <link rel="stylesheet" href="css/iconfont.css" />
     <link rel="stylesheet" href="css/reset.css" />
-<%--    <script src="js/jquery-1.8.2.min.js"></script>--%>
-<%--    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>--%>
-<%--    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>--%>
-   <%-- <script type="text/javascript">
+    <link href="css/passenger.css" rel="stylesheet" />
+    <script src="js/passenger.js"></script>
+    <%--    <script src="js/jquery-1.8.2.min.js"></script>--%>
+    <%--    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>--%>
+    <%--    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>--%>
+    <%-- <script type="text/javascript">
         $(document).ready(function () {
             //alert(location.href.split('#')[0]);
             $.ajax({
@@ -117,26 +119,7 @@
                 <!-- 预定入口 -->
                 <nav class="bar bar-tab book">
                     <div class="tell"><a href="tel:4000044007" class="iconfont">&#xe62c;</a></div>
-                    <div class="num">
-                        <div class="adult">
-                            成人
-        <div class="spinner clearfix">
-            <span class="decrease iconfont external">&#xe62f;</span>
-            <div class="spi_num" id="adultnum">0</div>
-            <div class="spi_maxnum" style="display: none"><%=adult %></div>
-            <span class="increase iconfont external">&#xe62e;</span>
-        </div>
-                        </div>
-                        <div class="children">
-                            儿童
-      <div class="spinner clearfix">
-          <span class="decrease iconfont external">&#xe62f;</span>
-          <div class="spi_num" id="puppynum">0</div>
-          <div class="spi_maxnum" style="display: none"><%=puppy %></div>
-          <span class="increase iconfont external">&#xe62e;</span>
-      </div>
-                        </div>
-                    </div>
+
                     <div class="reserve">
                         <asp:HiddenField ID="HiddenFieldid" runat="server" />
                         <a class="external" href="indent_fill.aspx?adult=0&children=0&lineid=<%=lineid %>" id="yudingbtn">立即预定</a>
