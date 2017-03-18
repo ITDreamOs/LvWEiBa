@@ -86,7 +86,7 @@ public partial class index_indent_fill : System.Web.UI.Page
                 {
                     strhotel += string.Format(" <input id='Checkbox1' name='hotel' class='hotel' type='checkbox' value='{0}' />{1}", item.Id, item.Name);
                 }
-                Literal1.Text = strhotel;
+               // Literal1.Text = strhotel;
 
             }
 
@@ -180,7 +180,7 @@ public partial class index_indent_fill : System.Web.UI.Page
         if (bllhotel.Add(m) > 0)
         {
             string strhotel = string.Format(" <input id='Checkbox1' name='hotel' checked class='hotel' type='checkbox' value='{0}' />{1}", id, m.Name);
-            Literal1.Text += strhotel;
+           // Literal1.Text += strhotel;
         }
     }
 

@@ -1,68 +1,24 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="indent_fill.aspx.cs" Inherits="index_indent_fill" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<html >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>填写订单</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css"> -->
-    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css" />
-    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css" />
-    <link rel="stylesheet" href="css/iconfont.css" />
-    <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css"/> -->
-    <link rel="stylesheet" href="css/reset.css" />
-    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-    <script src="http://res.mail.qq.com/mmr/static/lib/js/jquery.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css"> -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/passenger.css">
 
-    <style type="text/css">
-        .hotel {
-            margin-left: 20px;
-        }
-    </style>
-    <script type="text/javascript">
-        function addhotel() {
-            if (document.getElementById("hotelname").value != "") {
-                var checkBox = document.createElement("input");
-                checkBox.setAttribute("type", "checkbox");
-
-                checkBox.setAttribute("name", "hotel");
-
-                document.getElementById("div_hotel").appendChild(checkBox);
-
-            }
-        }
-        function checkParams() {
-            var name = $("#hotelname").val();
-            var card = $("#card").val();
-            var mobile = $("#Mobile").val();
-            var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-            if (name.length <= 0) {
-                alert("姓名不为空");
-                return false;
-            }
-            if (card.length <= 0) {
-                alert("身份证不为空");
-                return false;
-            }
-            if (reg.test(card) === false) {
-                alert("身份证输入不合法");
-                return false;
-            }
-            if (!(/^1[3|4|5|7|8]\d{9}$/.test(mobile))) {
-                alert("手机号格式不合法!");
-                return;
-            }
-            return true;
-        }
-    </script>
-</head>
+  </head>
 <body>
     <div class="page-group">
         <!-- 你的html代码 -->
@@ -138,26 +94,23 @@
                             <li class="item-content">
                                 <div class="item-inner">
                                     <div class="item-title">选择旅客</div>
-
                                 </div>
-
                             </li>
                         </ul>
-
-                        <ul>
-                            <li class="item-content">
+                       <%-- <ul>
+                <li class="item-content">
                                 <div class="item-inner">
                                     <div id="div_hotel" class="item-title">
                                         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
                                         <%--       <input id="Checkbox1" name="hotel" class="hotel" type="checkbox" value="1" />李明
-                              <input id="Checkbox2" name="hotel" class="hotel"  type="checkbox" value="1" />李明2--%>
+                              <input id="Checkbox2" name="hotel" class="hotel"  type="checkbox" value="1" />李明2
                                     </div>
                                 </div>
                             </li>
-                            <asp:Literal ID="lit_hotel" runat="server"></asp:Literal>
-                        </ul>
+                      --   <asp:Literal ID="lit_hotel" runat="server"></asp:Literal>
+                        </ul>--%>
 
-                        <li class="item-content">
+                      <%--  <li class="item-content">
                             <div class="item-inner">
                                 <div class="item-title">新增旅客</div>
                                 <asp:Button class="button" ID="Button1" runat="server" Text="添加" Width="100" OnClick="Button1_Click" OnClientClick="return checkParams()" />
@@ -200,11 +153,16 @@
                                 </li>
 
                             </ul>
-                        </div>
+                        </div>--%>
                     </div>
-                    <div class="content-block indent">
+                     <div class="content-block indent passenger-order-submit">
+              <div class="col-100"><a href="indent_pay.html" class="button button-big ">提交订单</a></div>
+          </div>
+                    <div class="content-block indent passenger-order-submit">
+                         <div class="col-100"><a href="indent_pay.html" class="button button-big ">提交订单</a></div>
                         <div class="col-100" id="subdiv">
-                            <asp:Button class="button button-big " ID="btn_submit" runat="server" Text="提交订单" OnClick="btn_submit_Click" />
+                            <input  type="button" class="button button-big"  runat="server" ID="btn_submit" OnClick="btn_submit_Click" value="提交订单"   />
+                         <%--   <asp:Button class="button button-big " ID="btn_submit" runat="server" Text="提交订单" OnClick="btn_submit_Click" />--%>
                         </div>
                     </div>
                 </div>
@@ -225,7 +183,7 @@
     <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
     <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
     <script type="text/javascript" src="js/config.js"></script>
-
+     <script type="text/javascript" src="js/passenger.js"></script>
 
 
 </body>
