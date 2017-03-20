@@ -502,8 +502,10 @@ $(function() {
       idCard: '33030119800101111X',
       type: 'adult'
     }]);
-    // 模拟，选取两位乘客
-    selectPassengers(['111', '222'], passengerListDom);
+     // 模拟，选取两位乘客
+      //selectPassengers(['111', '222'], passengerListDom);
+
+
   }
 });
 

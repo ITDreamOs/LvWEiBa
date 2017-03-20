@@ -155,11 +155,8 @@
                             </ul>
                         </div>--%>
                     </div>
-                     <div class="content-block indent passenger-order-submit">
-              <div class="col-100"><a href="indent_pay.html" class="button button-big ">提交订单</a></div>
-          </div>
+
                     <div class="content-block indent passenger-order-submit">
-                         <div class="col-100"><a href="indent_pay.html" class="button button-big ">提交订单</a></div>
                         <div class="col-100" id="subdiv">
                             <input  type="button" class="button button-big"  runat="server" ID="btn_submit" OnClick="btn_submit_Click" value="提交订单"   />
                          <%--   <asp:Button class="button button-big " ID="btn_submit" runat="server" Text="提交订单" OnClick="btn_submit_Click" />--%>

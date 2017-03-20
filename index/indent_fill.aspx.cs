@@ -72,6 +72,7 @@ public partial class index_indent_fill : System.Web.UI.Page
                 this.lbl_Cfdate.Text = Convert.ToDateTime(model.Sdate).ToString("yyyy-MM-dd");
                 string str = string.Format(@"<p>市场价：￥{0}（{1}）</p>
                        <p>优惠价：￥{2}（{3}）</p>", scPrice, scine, yhPrice, yhine);
+
                 this.hid_price_sc.Value = scPrice.ToString();
                 this.hid_price_yh.Value = yhPrice.ToString();
                 this.hid_price_jj.Value = jjPrice.ToString();

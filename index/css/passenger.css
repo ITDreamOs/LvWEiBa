@@ -66,3 +66,4 @@ background-size: cover; }
   -webkit-transition: 0.3s all;
 }
 .slide-out .header { position: absolute; }
+ .passenger-order-submit input.button { border-color: #ffb300; background: #ffb300; color: #fff }
