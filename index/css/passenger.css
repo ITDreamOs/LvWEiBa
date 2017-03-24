@@ -4,7 +4,7 @@
 .contact-phone { border-top: 0.5rem solid #f2f2f2; border-bottom: 0.5rem solid #f2f2f2; }
 .passenger-select { margin-left: 0.75rem; min-height: 2.2rem; border-bottom: 1px solid #f2f2f2; position: relative }
 .passenger-select, .passenger-list li { list-style: none; }
-.passenger-info { padding: 0.4rem 0.75rem 0.35rem 0; margin-left: 1.75rem; margin-right: 0; }
+.passenger-info { padding: 0.4rem 0.75rem 0.35rem 1.75rem; position: relative; z-index: 10; margin-right: 0; }
 .passenger-select .icon-del,
 .passenger-select .icon-tick {
   width: 1.2rem; height: 1.2rem;
@@ -13,12 +13,14 @@
   display: block;
   background: no-repeat center center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAE30lEQVRoQ+1Z3U4bRxQ+Z3fdmtKq5KbtclN4gjp3KbYUuIuwqzhPEHiCOE9Q+gR1niDwBDGqjXqHkWzau5gnAG68bW9CVNymxd5TzXh3mZ2d9a5nlxSkWLKQ8MyZ853/H4Q7/sE7zj98AMA0+KZeWvrn308euojriFgigBICLInaJYALBBgQ0cAg6n780V9H91qDi6wWkEkDTq2yTgDPEKCuwwgBtBDghd3udXXusztaABjjAPA9ALC/4Q/BW0AYsH8SuPwvglHihwhKgPC5glkG4AcdIHMBYKby7mrxR0DcCpsHnQDBrkXU/eLgmDMd93EePVgh06wDwhYCfiOZWWvButyex7RSA/hjc600QXwFiCvCo0em6zaSmJ4FBixrFwAeBmeIzkyiJ2lppgLg2for3zEJ6AQBGzoqV4GZ0qemrxHm8CZOtr/86ZdWkm8kAvDs/dAnRET7C4XR1jxqTmLCj2TvrhabgPhUOL+RJKSZAJjZjA3j8Fry7ovl9nEjDUO6Z5xaZccLEMA0YbnuxixzigXAHPbvq8VDFte9iHLjzPugRRBAdFYsjO7HaTwWwLC21kQwnnHmifaXO32tWK+riWG13ELEx9PwS3t2px+KfD5dJYCQ3ROdFwujUt42nwSMW8B4sSuEWqU/xAFgTusnqURHSmJG93cpgHTtdm9DphUBIF06stu9aLbV5UjjnlOrsCzt54mIMKMAquVdIZT9b9IXHJoJcBrGFb4QATCsVd7wsEl0bnf6YtbVkF8+V4a18sD3haJ1eU/0xxAA0XwIbj7mp4UnRkQDJ0/EDC0DCJKI6br309YjaRnRPcfrMMN4rcpHMoDAYex2L7HM0GVI555Tq5B3LxRYQkwOq+XXPPPeIvv3wQZ+QHRmd/qrykQWh1IlMd4bTD4L1fM6kmV3iuafJ0mJUgynonXIJqRUk4qxUKrX5dy7l6ZUEd/LBYATzhfZIMyodQITEmqjXAAwwl7YzcY8ACTV/N5bygATdmI/YUiOkpnDHAg41fIpa2dZN7jc7k+HBPJUIs7Ocng/M4lUYVRsJOSMl5mDDASkApONX1jCjWrgLpQSABAqMBXVaOWCD59ukR/49g8Eb+1OLzSyVFSj162kjDaDFWhflbrDSGsZ1cCjBytgWaf8xVughaC8YfyMx6v2z7+eidJQt5RiknLdbfvgmE3P3vvH2VzbAsN46T2s7A7VAAQtsNnMgnW5mlSr5I1u2tR/eurPpOLK+9iSOTRgIhosFEYb7xNEyHSmk+sgdCaaUFB/CK0cEO3anf523pJW0XOq5Zf+BFzOvPL5mU0LG4WDaQ2CmT7RbrEwen5TmoiM79muYTIuyY6bWgPs4HSsbnR9EGxFdBPmJI8yWcw3yV1PamtTtY0REGzfRdSwO/29PEzKqZafEmIz2KulZD5SzM1iRjHq43nCMNznaeb4Ktq/f/dt3XUNtvEJxjd89zCe1GeZzVwmJD8cmhx7P/INJFGLfb86ON6fJYjfNtceE2KdfeVNprcnU0abOJqpTCgCgju3uSMtI+Rj8uYxfkRJtAeTyU5aqWfSgHiZL+wso4GEdUD8ei5/IDonpBaO3aYO4/5bWhpQMcq3OWzRDWyVyjunpeudF9+pXTCfIYBBmm1mWmHkBiDtg3mf+wAgb4nOS+8/nJd8T1hBPz0AAAAASUVORK5CYII=);
 background-size: cover; }
+.passenger-select .icon-del { z-index: 20 }
 .passenger-idcard { font-size: 0.65rem; }
 .passenger-type { position: absolute; top: 0.6rem; right: 0.75rem; font-size: 0.65rem; }
 .passenger-modify { overflow: hidden; text-align: center; font-size: 0.65rem; color: #0894ec; border-top: 1px solid #f2f2f2; position: relative; top: -1px; }
 .passenger-modify .passenger-btn { width: 50%; padding: 0.5rem 0; float: left; position: relative;  }
 .passenger-modify .passenger-btn:first-child::after { content: ''; position: absolute; right: 0; top: 0.5rem; height: 50%; border-right: 1px solid #f0f0f0 }
 .passenger-order-submit { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important }
+.passenger-order-submit input.button { border-color: #ffb300; background: #ffb300; color: #fff }
 
 .yellow{background-color:#ffeba5;padding-top: 0} /* padding-top:1.8rem; */ /* 315修改 */
 
@@ -45,6 +47,7 @@ background-size: cover; }
 }
 .passenger-mask-submit { background: none; border: none; padding-top: 0.6rem; }
 .passenger-mask-submit .button { padding: 0.4rem 0; height: auto; font-size: 0.8rem }
+.passenger-mask-submit.red .button { border: 1px solid #e74c3c; color: #e74c3c; background: none; }
 .tip-info { color: #999; font-size: 0.65rem; margin-left: 0.75rem; margin-top: 0.4rem; }
 .passenger-mask .passenger-info { margin-right: 2.6rem }
 .radio-sex { border: 1px solid #ccc; position: absolute; left: 0.3rem; top: -0.65rem; padding: 0rem 0.6rem; font-size: 0.7rem }
@@ -66,4 +69,4 @@ background-size: cover; }
   -webkit-transition: 0.3s all;
 }
 .slide-out .header { position: absolute; }
- .passenger-order-submit input.button { border-color: #ffb300; background: #ffb300; color: #fff }
+.jine p { text-indent: 0; margin: 1em 0.75rem }

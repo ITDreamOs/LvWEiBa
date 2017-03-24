@@ -25,6 +25,7 @@
    <script src="index/js/swiper-3.4.1.min.js"></script>
     <script src="index/js/swiper-3.4.1.jquery.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    
     <script type="text/javascript">
        
     </script>
@@ -292,7 +293,8 @@
     </div>
     <script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
-  <%--  <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>--%>
+  <script src="index/js/code.js" type="text/javascript"></script>
+    <%--  <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>--%>
    <%-- <script type="text/javascript" src="index/js/config.js"></script>--%>
 </body>
 </html>

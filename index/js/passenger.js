@@ -27,14 +27,65 @@ function getPassengerData() {
     alert('请填写正确的手机号码');
     return null;
   }
-  var passengers = [];
+  var adultIds = [];
+  var childrenIds = [];
   for (var i = 0; i < selectedPassengers.length; i++) {
-    passengers.push(passengerList[selectedPassengers[i]]);
+    if (passengerList[selectedPassengers[i]].type == '0') adultIds.push(parseInt(selectedPassengers[i]));
+    if (passengerList[selectedPassengers[i]].type == '1') childrenIds.push(parseInt(selectedPassengers[i]));
   }
-  return {
-    passengers: passengers,
-    contactPhone: contactPhone
-  };
+
+  var param = {
+    openId: openId,
+    routId: getQueryStringByName('lineid'),
+    contactPhone: contactPhone,
+    adultIds: adultIds,
+    childrenIds: childrenIds
+  }
+
+  fetch('Order/SubmitOrder', 'POST', {
+    data: {
+      param: param
+    }
+  }, function(res) {
+    if (res.errorMessage) {
+      if (res.errorMessage.match('Exception')) alert('创建订单失败');
+      else alert(res.errorMessage);
+    } else {
+      location.href = './indent_pay.aspx?ddbm=' + res.result.order_id + '&lineid=' + getQueryStringByName('lineid');
+    }
+  });
+}
+
+/**
+  方法：计算价格并更新dom
+  */
+function calculatePrice() {
+  var adultCount = 0;
+  var childrenCount = 0;
+
+  for (var i = 0; i < selectedPassengers.length; i++) {
+    if (passengerList[selectedPassengers[i]].type == '0') adultCount++;
+    if (passengerList[selectedPassengers[i]].type == '1') childrenCount++;
+  }
+
+  if (adultCount || childrenCount) {
+    fetch('TouristRoutes/CalculatePrice', 'POST', { data: {
+      param: {
+        routId: getQueryStringByName('lineid'),
+        adultCount: adultCount,
+        childrenCount: childrenCount
+      }
+    }}, function(res) {
+      $('.jine').html('<p>' + res.result.reMarks + '</p>');
+      $('.page-group').find('.item-after').eq(5).html(res.result.totalCalculatePrice.discountPrice + '元');
+      $('.page-group').find('.item-after').eq(4).text('成人*' + adultCount + ' 儿童*' + childrenCount);
+    });
+  } else {
+    // 仅更新dom
+    $('.jine').html('<p>请选择旅客</p>');
+    $('.page-group').find('.item-after').eq(5).html('');
+    $('.page-group').find('.item-after').eq(4).text('成人*' + adultCount + ' 儿童*' + childrenCount);
+  }
 }
 
 /**
@@ -48,15 +99,18 @@ function selectPassengers(data, dom) {
       '<li class="passenger-select" data-id="' + passengerList[data[i]].id + '">',
         '<i class="icon-del" data-id="' + passengerList[data[i]].id + '"></i>',
         '<div class="passenger-info">',
-          '<div class="passenger-name">' + passengerList[data[i]].personName + '</div>',
-          '<div class="passenger-idcard">' + (passengerList[data[i]].birthDate ? '出生日期：' + passengerList[data[i]].birthDate : passengerList[data[i]].idCard) + '</div>',
-          '<div class="passenger-type">' + (passengerList[data[i]].type === 'adult' ? '成人票' : '儿童票') +'</div>',
+          '<div class="passenger-name">' + passengerList[data[i]].name + '</div>',
+          '<div class="passenger-idcard">' + passengerList[data[i]].card + '</div>',
+          '<div class="passenger-type">' + (passengerList[data[i]].type == 0 ? '成人票' : '儿童票') +'</div>',
         '</div>',
       '</li>'
     ].join().replace(/,/g, ''));
   }
   // 更新数据
   selectedPassengers = selectedPassengers.concat(data);
+
+  // 计算价格
+  calculatePrice();
 }
 
 /**
@@ -87,6 +141,9 @@ function removePassengers(data, dom) {
   }
 
   console.log(selectedPassengers);
+
+  // 计算价格
+  calculatePrice();
 }
 
 /**
@@ -98,13 +155,13 @@ function insertPassengerList(data) {
   if (data) {
     var domStr = '';
     for (var i = 0; i < data.length; i++) {
-      if (data[i].type === 'adult') {
+      if (data[i].type == 0) {
         domStr += [
           '<li class="passenger-select selected" data-id="' + data[i].id + '">',
             '<i class="icon-tick"></i>',
             '<div class="passenger-info">',
-              '<div class="passenger-name">' + data[i].personName + '<span class="extra-name">（成人票）</span></div>',
-              '<div class="passenger-idcard">' + data[i].idCard + '</div>',
+              '<div class="passenger-name">' + data[i].name + '<span class="extra-name">（成人票）</span></div>',
+              '<div class="passenger-idcard">' + data[i].card + '</div>',
             '</div>',
             '<div class="edit-con">',
               '<i class="icon-editboard" data-id="' + data[i].id + '"></i>',
@@ -112,7 +169,7 @@ function insertPassengerList(data) {
           '</li>'
         ].join().replace(/,/g, '');
       }
-      domList.append(domStr);
+      domList.prepend(domStr);
       // 更新数据
       passengerList[data[i].id] = data[i];
       // 默认订单页选中
@@ -133,7 +190,7 @@ function removePassengerList(data) {
     domList.each(function(index) {
       var el = $(this);
       console.log(data, el.data('id'));
-      if (data.indexOf(el.data('id').toString()) > -1) {
+      if (data.indexOf(el.data('id')) > -1) {
         el.remove();
         // 处理预定页面的删除
         removePassengers([el.data('id')], passengerListDom);
@@ -180,14 +237,14 @@ function showAdultPassengers() {
     var domStr = '';
     console.log('load data', passengerList);
     for (var i in passengerList) {
-      if (passengerList[i].type === 'adult') {
-        var isSelected = selectedPassengers.indexOf(passengerList[i].id) > -1;
+      if (passengerList[i].type == 0) {
+        var isSelected = selectedPassengers.indexOf(passengerList[i].id.toString()) > -1;
         domStr += [
           '<li class="passenger-select ' + (isSelected ? 'selected' : '') + '" data-id="' + passengerList[i].id + '">',
             '<i class="icon-tick"></i>',
             '<div class="passenger-info">',
-              '<div class="passenger-name">' + passengerList[i].personName + '<span class="extra-name">（成人票）</span></div>',
-              '<div class="passenger-idcard">' + passengerList[i].idCard + '</div>',
+              '<div class="passenger-name">' + passengerList[i].name + '<span class="extra-name">（成人票）</span></div>',
+              '<div class="passenger-idcard">' + passengerList[i].card + '</div>',
             '</div>',
             '<div class="edit-con" data-id="' + passengerList[i].id + '">',
               '<i class="icon-editboard"></i>',
@@ -236,7 +293,7 @@ function showAdultMgr(type, id) {
           '<div class="item-inner">',
             '<div class="item-title">旅客姓名</div>',
             '<div class="item-after item-input">',
-              '<input type="text" placeholder="请填写旅客姓名" ' + (type === 'edit' ? 'value=' + passengerList[id].personName : '') + ' />',
+              '<input type="text" placeholder="请填写旅客姓名" ' + (type === 'edit' ? 'value=' + passengerList[id].name : '') + ' />',
             '</div>',
           '</div>',
         '</li>',
@@ -252,14 +309,15 @@ function showAdultMgr(type, id) {
           '<div class="item-inner">',
             '<div class="item-title">身份证号</div>',
             '<div class="item-after item-input">',
-              '<input type="text" placeholder="请填写身份证号码" ' + (type === 'edit' ? 'value=' + passengerList[id].idCard : '') + ' />',
+              '<input type="text" placeholder="请填写身份证号码" ' + (type === 'edit' ? 'value=' + passengerList[id].card : '') + ' />',
             '</div>',
           '</div>',
         '</li>',
       '</div>',
       '<div class="content-block indent passenger-mask-submit" data-type="' + (type === 'edit' ? 'edit-passenger' : 'add-passenger') + '" ' + (type === 'edit' ? 'data-id=' + id : '') + '>',
           '<div class="col-100"><a class="button">完成</a></div>',
-      '</div>'
+      '</div>',
+      type === 'edit' ? '<div class="content-block indent passenger-mask-submit red" data-type="del-passenger" data-id="' + id + '"><div class="col-100"><a class="button">删除</a></div></div>' : ''
     ].join().replace(/,/g, ''));
   }, 400);
 }
@@ -299,20 +357,36 @@ function showChildMgr(type, id) {
         '</li>',
         '<li class="item-content">',
           '<div class="item-inner">',
-            '<div class="item-title">儿童性别</div>',
+            '<div class="item-title">旅客类型</div>',
             '<div class="item-after">',
-              '<span style="margin-left: 0.25rem"><div class="radio-sex man selected">男</div><div class="radio-sex woman">女</div></span>',
+              '<span style="margin-left: 0.25rem">儿童票</span>',
             '</div>',
           '</div>',
         '</li>',
         '<li class="item-content">',
           '<div class="item-inner">',
-            '<div class="item-title">出生日期</div>',
+            '<div class="item-title">身份证号</div>',
             '<div class="item-after item-input">',
-              '<input type="date" placeholder="请选择出生日期" />',
+              '<input type="text" placeholder="请填写身份证号码" />',
             '</div>',
           '</div>',
         '</li>',
+        // '<li class="item-content">',
+        //   '<div class="item-inner">',
+        //     '<div class="item-title">儿童性别</div>',
+        //     '<div class="item-after">',
+        //       '<span style="margin-left: 0.25rem"><div class="radio-sex man selected">男</div><div class="radio-sex woman">女</div></span>',
+        //     '</div>',
+        //   '</div>',
+        // '</li>',
+        // '<li class="item-content">',
+        //   '<div class="item-inner">',
+        //     '<div class="item-title">出生日期</div>',
+        //     '<div class="item-after item-input">',
+        //       '<input type="date" placeholder="请选择出生日期" />',
+        //     '</div>',
+        //   '</div>',
+        // '</li>',
       '</div>',
       '<div class="tip-info">儿童身高须在1.2-1.5米，用同行成人证件取票。</div>',
       '<div class="content-block indent passenger-mask-submit" data-type="add-child">',
@@ -336,7 +410,7 @@ function collectSelectedPassengers() {
   // 更新数据
   var oldSelected = [];
   for (var i = 0; i < selectedPassengers.length; i++) {
-    if (passengerList[selectedPassengers[i]].type === 'child') {
+    if (passengerList[selectedPassengers[i]].type == '1') {
       oldSelected.push(selectedPassengers[i]);
     }
   }
@@ -353,25 +427,66 @@ function collectSelectedPassengers() {
 function updatePassenger(type, id) {
   var el = $('.J_adult_mgr');
   var keys = el.find('input');
-  var personName = keys.eq(0).val();
-  var idCard = keys.eq(1).val().toUpperCase();
-  if (!personName) {
+  var name = keys.eq(0).val();
+  var card = keys.eq(1).val().toUpperCase();
+  if (!name) {
     alert('请填写旅客姓名');
     return;
   }
-  if (!idCard.match(/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/)) {
+  if (!card.match(/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/)) {
     alert('请填写正确的身份证号');
     return;
   }
-  // ajax请求模拟
-  var record = {
-    id: type === 'edit' ? id.toString() : parseInt(Math.random() * 100000 + 1000).toString(),
-    personName: personName,
-    idCard: idCard,
-    type: 'adult'
-  };
-  if (id) removePassengerList([record.id]);
-  insertPassengerList([record]);
+  // 新增乘客
+  if (!id) {
+    fetch('Contacts/AddContacts', 'POST', { data: {
+      param: {
+        member: openId,
+        mobile: '188',
+        name: name,
+        card: card,
+        type: '0', // 0成人，1儿童
+        sj: new Date().Format('yyyy-MM-dd hh:mm:ss')
+      }
+    }}, function(res) {
+      if (res.result) {
+        insertPassengerList([{
+          id: res.result.id,
+          name: name,
+          card: card,
+          type: '0'
+        }]);
+      }
+    });
+  } else if (type !== 'del') {
+    fetch('Contacts/UpdateContacts', 'POST', { data: {
+      param: {
+        id: id,
+        member: openId,
+        mobile: '188',
+        name: name,
+        card: card,
+        type: '0', // 0成人，1儿童
+        sj: new Date().Format('yyyy-MM-dd hh:mm:ss')
+      }
+    }}, function(res) {
+      if (res.result) {
+        removePassengerList([id]);
+        insertPassengerList([{
+          id: res.result.id,
+          name: name,
+          card: card,
+          type: '0'
+        }]);
+      }
+    });
+  } else {
+    fetch('Contacts/DeleteContacts', 'POST', { data: {
+      param: id
+    }}, function(res) {
+      removePassengerList([id]);
+    });
+  }
   setTimeout(function() {
     closeMask(el);
   }, 100);
@@ -383,33 +498,66 @@ function updatePassenger(type, id) {
 function updateChild(type, id) {
   var el = $('.J_child_mgr');
   var keys = el.find('input');
-  var personName = keys.eq(0).val();
-  var sex = $('.radio-sex.man').hasClass('selected') ? 'man' : 'woman';
-  var birthDate = keys.eq(1).val();
-  if (!personName) {
+  var name = keys.eq(0).val();
+  // var sex = $('.radio-sex.man').hasClass('selected') ? 'man' : 'woman';
+  // var birthDate = keys.eq(1).val();
+  var card = keys.eq(1).val().toUpperCase();
+  if (!name) {
     alert('请填写儿童姓名');
     return;
   }
-  if (!birthDate) {
-    alert('请填写儿童出生日期');
+  if (!card.match(/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/)) {
+    alert('请填写正确的身份证号');
     return;
   }
-  // ajax请求模拟
-  var record = {
-    id: type === 'edit' ? id.toString() : parseInt(Math.random() * 100000 + 1000).toString(),
-    personName: personName,
-    birthDate: birthDate,
-    sex: sex,
-    type: 'child'
-  };
-  if (id) removePassengerList([record.id]);
-  insertPassengerList([record]);
-  setTimeout(function() {
-    closeMask(el);
-  }, 100);
+
+  fetch('Contacts/AddContacts', 'POST', { data: {
+    param: {
+      member: openId,
+      mobile: '188',
+      name: name,
+      card: card,
+      type: '1', // 0成人，1儿童
+      sj: new Date().Format('yyyy-MM-dd hh:mm:ss')
+    }
+  }}, function(res) {
+    if (res.result) {
+      insertPassengerList([{
+        id: res.result.id,
+        name: name,
+        card: card,
+        type: '1'
+      }]);
+      setTimeout(function() {
+        closeMask(el);
+      }, 100);
+    }
+  });
 }
 
-$(function() {
+// $(function() {
+//   /** 保存微信传来的code **/
+//   var code = getQueryStringByName('code');
+//   if (code) {
+//     fetch('Account/GetUser', 'POST', {
+//       data: {
+//         param: { code: code }
+//       }
+//     }, function(res) {
+//       if (res.result) {
+//         openId = res.result.openId;
+//         localStorage.setItem('lvwei8_wx_code', openId);
+//       }
+//       init();
+//     });
+//   } else {
+//     openId = localStorage.getItem('lvwei8_wx_code');
+//     init();
+//   }
+// });
+
+function init() {
+  /** 主逻辑 **/
   if (location.href.match('indent_fill')) { // 地址判断
     // DOM节点保存
     var listDom = $('.list-block');
@@ -462,6 +610,9 @@ $(function() {
         if (type === 'edit-passenger') {
           updatePassenger('edit', $(e.currentTarget).data('id'));
         }
+        if (type === 'del-passenger') {
+          updatePassenger('del', $(e.currentTarget).data('id'));
+        }
         if (type === 'add-child') {
           updateChild('add');
         }
@@ -478,36 +629,61 @@ $(function() {
       $('body').delegate('.add-adult', 'click', function(e) {
         showAdultPassengers();
       });
+      $('.page-group').find('.passenger-order-submit').click(function(e) {
+        getPassengerData();
+      });
     }
 
     // 页面加载完毕立刻调用
     passengerInit();
     bindEvents();
 
-    // 模拟，初始化乘客列表
-    updatePassengerList([{
-      id: '111', // id为字符串
-      personName: '张三',
-      idCard: '33030119900101111X',
-      type: 'adult'
-    }, {
-      id: '222', // id为字符串
-      personName: '李儿童',
-      birthDate: '2010-01-01',
-      sex: 'man',
-      type: 'child'
-    }, {
-      id: '333',
-      personName: '王五',
-      idCard: '33030119800101111X',
-      type: 'adult'
-    }]);
-     // 模拟，选取两位乘客
-      //selectPassengers(['111', '222'], passengerListDom);
+    // 加载路线信息
+    fetch('TouristRoutes/GetTouristRoute', 'POST', {
+      data: {
+        param: getQueryStringByName('lineid')
+      }
+    }, function(res) {
+      $('.page-group').find('.item-after').each(function(index) {
+        if (index === 0) {
+          $(this).text(res.result.tTl);
+        }
+        if (index === 1) {
+          $(this).text(res.result.bianhao);
+        }
+        if (index === 2) {
+          $(this).text(res.result.sdate);
+        }
+        if (index === 3) {
+          $(this).text(res.result.splace);
+        }
+        if (index === 0) {
+          $(this).text(res.result.tTl);
+        }
+      });
+    });
 
+    // <p>市场价：￥8500（成人￥3000 x2；儿童￥2500 x1）</p>
 
+    // 加载旅客列表
+    fetch('Contacts/QueryContacts', 'POST', {
+      data: {
+        page: {
+          pageNo: 1,
+          pageSize: 50
+        },
+        param: {
+          memberOpenId: openId
+        }
+      }
+    }, function(res) {
+      if (res.result) {
+        // 初始化乘客列表
+        updatePassengerList(res.result);
+      }
+    });
   }
-});
+}
 
 function closeMask(dom) {
   var el = dom;
