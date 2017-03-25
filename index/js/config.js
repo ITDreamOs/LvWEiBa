@@ -18,9 +18,9 @@ $(function () {
         ],
         type: 'popup'
     });
-    $(document).on('click', '.swiper-wrapper', function () {
-        myPhotoBrowserCaptions.open();
-    });
+    // $(document).on('click', '.swiper-wrapper', function () {
+    //     myPhotoBrowserCaptions.open();
+    // });
 
     // 选项卡
     $(document).on('click', '.tabs1 li', function () {
@@ -126,4 +126,3 @@ $(function () {
 
 
 })
-

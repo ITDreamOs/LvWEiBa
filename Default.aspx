@@ -129,7 +129,7 @@
 
             </nav>
             <div class="content">
-              <div class="swiper-container">
+              <div class="swiper-container" style="padding-bottom: 0">
     <div class="swiper-wrapper">
         <%
             var list = new BaseClass.Dal.App_Ad().GetListAds("");
@@ -141,10 +141,7 @@
     %>
     </div>
     <div class="swiper-pagination"></div>
-    <div class="swiper-scrollbar"></div>
 </div>
-
-
 
                 <!-- 今日头条 -->
                 <div class="big_news clearfix">
