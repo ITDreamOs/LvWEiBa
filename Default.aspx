@@ -25,14 +25,14 @@
    <script src="index/js/swiper-3.4.1.min.js"></script>
     <script src="index/js/swiper-3.4.1.jquery.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    
+
     <script type="text/javascript">
-       
+
     </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-         
+
             $.ajax({
                 type: 'GET',
                 url: 'http://wx.lvwei8.com/API/WeixinApi.aspx' + '?url=' + location.href.split('#')[0],
@@ -110,7 +110,7 @@
         <!-- 你的html代码 -->
         <div class="page">
             <header class="bar bar-nav">
-             
+
    <a class="icon icon-app pull-left open-popup" href="#"></a>
                 <a id="login_icon" href="index/login.aspx" class="icon icon-me pull-right"></a>
                 <h1 class="title">驴尾巴旅游网</h1>
@@ -143,12 +143,12 @@
     %>
     </div>
     <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    <!-- <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div> -->
     <div class="swiper-scrollbar"></div>
 </div>
 
-               
+
                 <!-- 触摸轮播图 -->
  <%--               <div class="swiper-container index_">
                     <div class="swiper-wrapper">
@@ -229,7 +229,7 @@
                 </div>
 
                 <!-- 城市选择 -->
-               
+
 
                 <div class="footer">
                     Copyright©2015 旅微科技有限公司
@@ -298,4 +298,3 @@
    <%-- <script type="text/javascript" src="index/js/config.js"></script>--%>
 </body>
 </html>
-
