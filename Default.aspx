@@ -141,8 +141,6 @@
     %>
     </div>
     <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
     <div class="swiper-scrollbar"></div>
 </div>
 
@@ -159,7 +157,7 @@
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
-                
+
 
                 <!-- 今日头条 -->
                 <div class="big_news clearfix">
