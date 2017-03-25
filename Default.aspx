@@ -145,19 +145,6 @@
 </div>
 
 
-                <!-- 触摸轮播图 -->
- <%--               <div class="swiper-container index_">
-                    <div class="swiper-wrapper">
-                        <asp:Repeater ID="Repeater2" runat="server">
-                            <ItemTemplate>
-                                <div class="swiper-slide">
-                                    <img src="<%#Eval("adpic") %>" alt=""></div>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-
 
                 <!-- 今日头条 -->
                 <div class="big_news clearfix">
