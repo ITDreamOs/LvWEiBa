@@ -24,14 +24,14 @@
 <%--    <script src="index/js/jquery-3.1.1.min.js"></script>
         <link href="index/css/swiper-3.4.1.min.css" rel="stylesheet" />--%>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    
+
     <script type="text/javascript">
-       
+
     </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-         
+
             $.ajax({
                 type: 'GET',
                 url: 'http://wx.lvwei8.com/API/WeixinApi.aspx' + '?url=' + location.href.split('#')[0],
@@ -108,7 +108,7 @@
         <!-- 你的html代码 -->
         <div class="page">
             <header class="bar bar-nav">
-             
+
    <a class="icon icon-app pull-left open-popup" href="#"></a>
                 <a id="login_icon" href="index/login.aspx" class="icon icon-me pull-right"></a>
                 <h1 class="title">驴尾巴旅游网</h1>
@@ -129,7 +129,7 @@
 
             </nav>
             <div class="content">
-             <%-- <div class="swiper-container">
+              <div class="swiper-container">
     <div class="swiper-wrapper">
         <%
             var list = new BaseClass.Dal.App_Ad().GetListAds("");
@@ -141,30 +141,21 @@
     %>
     </div>
     <div class="swiper-pagination"></div>
-    <div class="a -button-prev"></div>
+    <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-scrollbar"></div>
-</div>--%>
+</div>
 
 
-
-               
                 <!-- 触摸轮播图 -->
-                <div class="swiper-container index_">
+ <%--               <div class="swiper-container index_">
                     <div class="swiper-wrapper">
-                         <%
-            var list = new BaseClass.Dal.App_Ad().GetListAds("");
-            foreach (var item in list)
-            {
-                var str = string.Format("<div class='swiper-slide'><a href='{1}'><img src='{0}' style='width:100%' /></a></div>", item.AdPic,item.AdjumpUrl);
-                Response.Write(str);
-            }
-    %>
-                          <%--      <div class="swiper-slide">
-
-                                    <img src="<%#Eval("adpic") %>" alt="">
-
-                                </div>--%>
+                        <asp:Repeater ID="Repeater2" runat="server">
+                            <ItemTemplate>
+                                <div class="swiper-slide">
+                                    <img src="<%#Eval("adpic") %>" alt=""></div>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -238,7 +229,7 @@
                 </div>
 
                 <!-- 城市选择 -->
-               
+
 
                 <div class="footer">
                     Copyright©2015 旅微科技有限公司
@@ -307,4 +298,3 @@
       <script src="index/js/code.js" type="text/javascript"></script>
 </body>
 </html>
-

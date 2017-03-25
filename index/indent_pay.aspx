@@ -15,7 +15,7 @@
     <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css"> -->
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css" />
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css" />
-    <link rel="stylesheet" href="css/iconfont1.css?version=1" />
+    <link rel="stylesheet" href="css/iconfont.css?version=1" />
     <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css"> -->
     <link rel="stylesheet" href="css/reset.css" />
     <link href="js/showLoading/css/showLoading.css" rel="stylesheet" />
@@ -81,12 +81,12 @@
             WeixinJSBridge.invoke(
             'getBrandWCPayRequest',
             {
-                "appId": appId,     //公众号名称，由商户传入     
-                "timeStamp": timeStamp,         //时间戳，自1970年以来的秒数     
-                "nonceStr": nonceStr, //随机串     
+                "appId": appId,     //公众号名称，由商户传入
+                "timeStamp": timeStamp,         //时间戳，自1970年以来的秒数
+                "nonceStr": nonceStr, //随机串
                 "package": "prepay_id=" + prepay_id,
-                "signType": "MD5",         //微信签名方式:     
-                "paySign": paySign //微信签名 
+                "signType": "MD5",         //微信签名方式:
+                "paySign": paySign //微信签名
             },//josn串
                         function (res) {
                             if (res.err_msg == 'get_brand_wcpay_request:ok') {
