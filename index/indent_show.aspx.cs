@@ -83,38 +83,38 @@ public partial class index_indent_show : System.Web.UI.Page
             {
                 goodId = dr["productNum"].ToString();
             }
-            //sDate
-            if (dr["Sdate"] != null)
-            {
-                startDate = dr["Sdate"].ToString();
-            }
+            ////sDate
+            //if (dr["Sdate"] != null)
+            //{
+            //    startDate = dr["Sdate"].ToString();
+            //}
 
             if (orderStateDB != "DZF")
             {
                 //供应商
-                if (dr["Provider"] != null)
-                {
-                    provider = dr["Provider"].ToString();
-                }
+                //if (dr["Provider"] != null)
+                //{
+                //    provider = dr["Provider"].ToString();
+                //}
                 //线路负责人
-                if (dr["LineMaster"] != null)
-                {
-                    lineMaster = dr["LineMaster"].ToString() + " " + dr["LineMasterMoble"].ToString();
-                }
+                //if (dr["LineMaster"] != null)
+                //{
+                //    lineMaster = dr["LineMaster"].ToString() + " " + dr["LineMasterMoble"].ToString();
+                //}
                 //导游
-                if (dr["Leader"] != null)
-                {
-                    leader = dr["Leader"].ToString() + " " + dr["LeaderMobil"].ToString();
-                }
+                //if (dr["Leader"] != null)
+                //{
+                //    leader = dr["Leader"].ToString() + " " + dr["LeaderMobil"].ToString();
+                //}
                 //集合时间
-                if (dr["JIheTime"] != null)
-                {
-                    jeHeTime = dr["JIheTime"].ToString();
-                }
-                if (dr["JiHePlace"] != null)
-                {
-                    jeHePlace = dr["JiHePlace"].ToString();
-                }
+                //if (dr["JIheTime"] != null)
+                //{
+                //    jeHeTime = dr["JIheTime"].ToString();
+                //}
+                //if (dr["JiHePlace"] != null)
+                //{
+                //    jeHePlace = dr["JiHePlace"].ToString();
+                //}
             }
             //人数
             member = dr["adultCount"].ToString() + "成人" + dr["puppyCount"] + "儿童";

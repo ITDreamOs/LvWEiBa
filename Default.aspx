@@ -13,17 +13,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link href="index/css/swiper-3.4.1.min.css" rel="stylesheet" />
-    <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css"> -->
+
    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css">
-   <%--  <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">--%>
+     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+
     <link rel="stylesheet" href="index/css/iconfont.css">
-    <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css"> -->
     <link rel="stylesheet" href="index/css/reset.css">
+
     <script src="index/js/analyse.js" type="text/javascript"></script>
-    <script src="index/js/jquery-3.1.1.min.js"></script>
-   <script src="index/js/swiper-3.4.1.min.js"></script>
-    <script src="index/js/swiper-3.4.1.jquery.min.js"></script>
+<%--    <script src="index/js/jquery-3.1.1.min.js"></script>
+        <link href="index/css/swiper-3.4.1.min.css" rel="stylesheet" />--%>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     
     <script type="text/javascript">
@@ -39,11 +38,10 @@
                 withCredentials: false,
                 error: function () {
                     console.log('出错');
-                    alert('请求出错');
+                    //alert('请求出错');
                 },
                 success: function (data) {
                     data = eval('(' + data + ')');
-                    alert(data.signature);
                     startConfig(data);
                 }
             });
@@ -131,7 +129,7 @@
 
             </nav>
             <div class="content">
-              <div class="swiper-container">
+             <%-- <div class="swiper-container">
     <div class="swiper-wrapper">
         <%
             var list = new BaseClass.Dal.App_Ad().GetListAds("");
@@ -143,24 +141,35 @@
     %>
     </div>
     <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
+    <div class="a -button-prev"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-scrollbar"></div>
-</div>
+</div>--%>
+
+
 
                
                 <!-- 触摸轮播图 -->
- <%--               <div class="swiper-container index_">
+                <div class="swiper-container index_">
                     <div class="swiper-wrapper">
-                        <asp:Repeater ID="Repeater2" runat="server">
-                            <ItemTemplate>
-                                <div class="swiper-slide">
-                                    <img src="<%#Eval("adpic") %>" alt=""></div>
-                            </ItemTemplate>
-                        </asp:Repeater>
+                         <%
+            var list = new BaseClass.Dal.App_Ad().GetListAds("");
+            foreach (var item in list)
+            {
+                var str = string.Format("<div class='swiper-slide'><a href='{1}'><img src='{0}' style='width:100%' /></a></div>", item.AdPic,item.AdjumpUrl);
+                Response.Write(str);
+            }
+    %>
+                          <%--      <div class="swiper-slide">
+
+                                    <img src="<%#Eval("adpic") %>" alt="">
+
+                                </div>--%>
                     </div>
                     <div class="swiper-pagination"></div>
-                </div>--%>
+                </div>
+                
+
                 <!-- 今日头条 -->
                 <div class="big_news clearfix">
                     <div class="wz">通知公告</div>
@@ -293,9 +302,9 @@
     </div>
     <script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
-  <script src="index/js/code.js" type="text/javascript"></script>
-    <%--  <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>--%>
-   <%-- <script type="text/javascript" src="index/js/config.js"></script>--%>
+  <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+    <script type="text/javascript" src="index/js/config.js"></script>
+      <script src="index/js/code.js" type="text/javascript"></script>
 </body>
 </html>
 

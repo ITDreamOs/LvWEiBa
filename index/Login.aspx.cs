@@ -6,6 +6,10 @@ using System.Web.UI.WebControls;
 using System.Data;
 using BaseClass.Common;
 using LVWEIBA.Model;
+using System.Net;
+using Newtonsoft.Json;
+using System.IO;
+using System.Text;
 
 public partial class index_Login : System.Web.UI.Page
 {
@@ -33,8 +37,22 @@ public partial class index_Login : System.Web.UI.Page
             string pass = Request.Form["pass"];
             string code = Request.Form["code"];
 
-            object codeCache = HttpContext.Current.Cache.Get("code" + tel);
-            if (codeCache == null)
+            //   object codeCache = HttpContext.Current.Cache.Get("code" + tel);
+
+            //if (codeCache == null)
+            //{
+            //    Response.Write("<script>alert('验证码失效');window.location='Login.aspx';</script>");
+            //    return;
+            //}
+
+            //if (code != codeCache.ToString())
+            //{
+            //    Response.Write("<script>alert('验证码不正确');window.location='Login.aspx';</script>");
+            //    return;
+            //}
+
+            var codeCache = GetPhoneCode(tel);
+            if (string.IsNullOrEmpty(codeCache))
             {
                 Response.Write("<script>alert('验证码失效');window.location='Login.aspx';</script>");
                 return;
@@ -110,4 +128,83 @@ public partial class index_Login : System.Web.UI.Page
 
         }
     }
+
+    /// <summary>
+    /// 获取手机验证码
+    /// </summary>
+    /// <param name="Phone">手机号</param>
+    /// <returns></returns>
+    private string GetPhoneCode(string Phone)
+    {
+
+        var result = string.Empty;
+
+        var url = "http://api.lvwei8.com/api/Message/GetPhoneCode";
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        var resultstr = string.Empty;
+        request.ContentType = "application/json;charset=UTF-8";
+        request.Method = "POST";
+        var jsonstr = JsonConvert.SerializeObject(new
+        {
+            clientCommonInfo = new
+            {
+                areaCode = 410100,
+                board = "PLK-TL01H",
+                brand = "HONOR",
+                currentUserId = 5802897,
+                deviceId = "867628027609429",
+                isOffical = false,
+                lat = 34.819557,
+                lng = 113.690696,
+                model = "PLK-TL01H",
+                product = "PLK-TL01H",
+                sdk = "6.0",
+                terminalSource = 2,
+                terminalSourceVersion = "1.2.91"
+            },
+            param = Phone
+        });
+        using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+        {
+            streamWriter.Write(jsonstr);
+            streamWriter.Flush();
+            streamWriter.Close();
+        }
+        //发请求
+        try
+        {
+            var response = (HttpWebResponse)request.GetResponse();
+            StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            resultstr = sr.ReadToEnd();
+            var apiResult = JsonConvert.DeserializeObject<BaseWebApiResponse>(resultstr);
+            if (apiResult==null)
+            {
+                return result;
+            }
+            result = apiResult.Result;
+            return result;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.ToString());
+        }
+    }
+    /// <summary>
+    /// 请求结果集
+    /// </summary>
+    public class BaseWebApiResponse
+    {
+        public int ErrorCode { get; set; }
+
+        /// <summary>
+        /// 错误信息
+        /// </summary>
+        public string ErrorMessage { get; set; }
+        /// <summary>
+        /// 返回结果的增量同步标识，
+        /// </summary>
+        public DateTime? SyncId { get; set; }
+        public string Result { get; set; }
+    }
+
 }

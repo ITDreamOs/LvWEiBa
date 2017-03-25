@@ -67,20 +67,40 @@
                 alert("手机号格式有误!");
                 return;
             }
-            $.post('control/sendCodeByPhone.aspx', { "mobile": tel }, function (data, status) {
-                // do something
-                //result = eval(data);
-                //if (result.code == "0") {
-                //    alert(result.data);
-                //    //置灰
-                //    timer(60)
-
-                //}
-                //else {
-                //    alert(result.data);
-                //}
-                timer(60);
+            $.ajax({
+                url: "http://api.lvwei8.com/api/Message/SendPhoneCode",
+                data: {
+                    "clientCommonInfo": {
+                        "areaCode": "410100", "board": "PLK-TL01H", "brand": "HONOR", "currentUserId": 5802897,
+                        "deviceId": "867628027609429", "isOffical": false, "lat": 34.819557, "lng": 113.690696, "model": "PLK-TL01H", "product": "PLK-TL01H", "sdk": "6.0", "terminalSource": 2, "terminalSourceVersion": "1.2.91"
+                    },
+                    "param":tel
+                },
+                dataType: "json",
+                type: "post",
+                success: function (databack) {
+              
+                        timer(60);
+                   
+                },
+                error: function () { alert("服务器异常"); }
             });
+        
+
+            //$.post('control/sendCodeByPhone.aspx', { "mobile": tel }, function (data, status) {
+            //    // do something
+            //    //result = eval(data);
+            //    //if (result.code == "0") {
+            //    //    alert(result.data);
+            //    //    //置灰
+            //    //    timer(60)
+
+            //    //}
+            //    //else {
+            //    //    alert(result.data);
+            //    //}
+            //    timer(60);
+            //});
         }
 
         function timer(time) {
@@ -115,17 +135,17 @@
                     <div class="list-block">
                         <ul>
                             <li><i class="iconfont">&#xe648;</i><input name="tel" id="tel" required type="number" placeholder="请输入手机号"></li>
-<%--                            <li><i class="iconfont">&#xe643;</i><input name="pass" id="pass" required type="password" placeholder="请输入密码"></li>--%>
+                            <%--                            <li><i class="iconfont">&#xe643;</i><input name="pass" id="pass" required type="password" placeholder="请输入密码"></li>--%>
                             <li><i class="iconfont">&#xe64a;</i>
                                 <input type="text" name="code" placeholder="请输入验证码" />
-                                <input class="get2" style="border:none" type="button"  onclick="getCode()" id="btn" value="获取验证码" />
+                                <input class="get2" style="border: none" type="button" onclick="getCode()" id="btn" value="获取验证码" />
                             </li>
                             <li class="login_btn">
                                 <input type="submit" value="登录" /></li>
                             <li class="registration"><a class="external" href="#">一个月之内免登录</a></li>
                         </ul>
                     </div>
-                   <%-- <div class="find_password">
+                    <%-- <div class="find_password">
                         <a href="lost_password.html">忘记密码</a>
                     </div>--%>
                 </div>
