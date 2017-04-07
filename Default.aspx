@@ -203,7 +203,7 @@
                                 </div>
                                 <div class="foot">
                                     <%#Eval("provider") %>
-                                    <div class="time">剩<em><%#Diffdatebynow(Eval("sdate").ToString()) %></em></div>
+                                    <div class="time">剩<em><%#Diffdatebynow(Eval("Enddate").ToString()) %></em></div>
                                 </div>
                             </a>
                         </ItemTemplate>
@@ -277,6 +277,7 @@
     <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
   <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
     <script type="text/javascript" src="index/js/config.js"></script>
+    <script src="index/js/showTicket.js"></script>
       <script src="index/js/code.js" type="text/javascript"></script>
 </body>
 </html>

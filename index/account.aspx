@@ -35,7 +35,7 @@
               <div class="box"><%=yue %> <span>元</span></div>
             </div>
               <a href="http://wx.lvwei8.com/index/chongzhi.aspx" class="external to_up">充&nbsp;值</a>
-              <a class="external to_up" href="withdraw.aspx" >提&nbsp;现</a>
+              <a class="external to_up" href="http://wx.lvwei8.com/index/withdraw.aspx" >提&nbsp;现</a>
             </div>
           </div><!-- content --> 
 

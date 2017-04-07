@@ -43,7 +43,9 @@ public partial class index_showline : System.Web.UI.Page
                 Label3.Text = lm.Splace;
                 Label1.Text = "余"+lm.adultTicketCount.ToString()+"位";
                 Label4.Text = lm.Provider;
-                Label5.Text ="剩"+ new BaseClass.Common.DateTimePlus().DateDiff(DateTime.Now, Convert.ToDateTime(lm.Sdate.ToString()), "hour");
+
+                Label5.Text ="距离下线"+ new BaseClass.Common.DateTimePlus().DateDiff(DateTime.Now, Convert.ToDateTime(lm.Sdate.ToString()), "hour");
+
                 Label6.Text = lm.adultTicketPrice.ToString();
                 Label7.Text = lm.adultzkPrice.ToString();
                 Label8.Text = lm.puppyTicketPrice.ToString();

@@ -16,7 +16,7 @@ public partial class index_withdraw : System.Web.UI.Page
         {
             if (string.IsNullOrEmpty(Request.QueryString["code"]))
             {
-                Response.Redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + GetWeiXinInf.appid + "&redirect_uri=http://wx.lvwei8.com/index/chongzhi.aspx&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
+                Response.Redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + GetWeiXinInf.appid + "&redirect_uri=http://wx.lvwei8.com/index/withdraw.aspx&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
 
             }
 
@@ -27,7 +27,7 @@ public partial class index_withdraw : System.Web.UI.Page
 
                 if (openid.Length < 10)
                 {
-                    Response.Redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + GetWeiXinInf.appid + "&redirect_uri=http://wx.lvwei8.com/index/chongzhi.aspx&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
+                    Response.Redirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + GetWeiXinInf.appid + "&redirect_uri=http://wx.lvwei8.com/index/withdraw.aspx&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
                 }
 
 
