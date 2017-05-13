@@ -59,7 +59,28 @@ $(function() {
       if (typeof init !== 'undefined') init();
     });
   } else {
-    openId = localStorage.getItem('lvwei8_wx_code');
+      if (typeof init !== 'undefined') {
+          var url = window.location.href;
+          var ajaxurl = "";
+          var indexs=url.indexOf("index/");
+          if (indexs >= 0) {
+              ajaxurl = "/index/control/GetUser.ashx";
+          } else {
+              ajaxurl = "~/index/control/GetUser.ashx";
+          }
+          $.get(ajaxurl, null, function (databack) {
+              if (databack != '') {
+                  openId = databack;
+                  localStorage.setItem('lvwei8_wx_code', openId);
+                  openId = localStorage.getItem('lvwei8_wx_code');
+              }
+          });
+          openId = localStorage.getItem('lvwei8_wx_code');
+      }
+      openId = localStorage.getItem('lvwei8_wx_code');
+
     if (typeof init !== 'undefined') init();
   }
+  
+
 });

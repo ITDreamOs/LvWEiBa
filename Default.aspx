@@ -211,8 +211,6 @@
                 </div>
 
                 <!-- 城市选择 -->
-
-
                 <div class="footer">
                     Copyright©2015 旅微科技有限公司
                 </div>
@@ -224,60 +222,75 @@
   <header class="bar bar-nav">
       <a class="icon pull-left close-popup" href="#"><i class="iconfont">&#xe66e;</i></a>
       <h1 class="title">选择城市</h1>
+      
   </header>
   <div class="list-block">
-    <ul>
-      <li class="item-content">
-        <div class="item-inner">
-          <div class="item-title">热门城市</div>
-        </div>
-      </li>
-      <li class="item-content">
-        <div class="item-inner">
-          <div class="item-title"><a href="">北京</a></div>
-        </div>
-      </li>
-            <li class="item-content">
-        <div class="item-inner">
-          <div class="item-title"><a href="">北京</a></div>
-        </div>
-      </li>
-            <li class="item-content">
-        <div class="item-inner">
-          <div class="item-title"><a href="">北京</a></div>
-        </div>
-      </li>
-            <li class="item-content">
-        <div class="item-inner">
-          <div class="item-title">山西省</div>
-        </div>
-      </li>
-            <li class="item-content">
-        <div class="item-inner">
-          <div class="item-title"><a href="">北京</a></div>
-        </div>
-      </li>
-            <li class="item-content">
-        <div class="item-inner">
-          <div class="item-title"><a href="">北京</a></div>
-        </div>
-      </li>
-            <li class="item-content">
-        <div class="item-inner">
-          <div class="item-title"><a href="">太原</a></div>
-        </div>
-      </li>
-
+    <ul id="Areas">
+    
+    
     </ul>
   </div>
   </div>
 </div>
     </div>
+    <script src="index/js/jquery-3.1.1.min.js"></script>
     <script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
   <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
     <script type="text/javascript" src="index/js/config.js"></script>
     <script src="index/js/showTicket.js"></script>
       <script src="index/js/code.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            var request = {};
+            $.ajax({
+                url: 'http://api.lvwei8.com/api/Area/QueryAllOpenAreas',
+                type: "post",
+                data: {
+                    "clientCommonInfo": { "areaCode": "410100", "board": "PLK-TL01H", "brand": "HONOR", "currentUserId": 5802897, "deviceId": "867628027609429", "isOffical": false, "lat": 34.819557, "lng": 113.690696, "model": "PLK-TL01H", "product": "PLK-TL01H", "sdk": "6.0", "terminalSource": 2, "terminalSourceVersion": "1.2.91" }, "page": {
+                        "pageNo": 1,
+                        "pageSize": 10000,
+                        "pageCount": 1,
+                        "recordCount": 4,
+                        "pageExtend": "sample string 5"
+                    },
+                    "filterSortMap": {
+                        "filterMap": {
+                            "year": 1,
+                            "month": 1
+                        },
+                        "sortMap": {
+                            "date": 0
+                        }
+                    },
+                    "syncId": Date.now(),
+                    "param": request
+                },
+                dataType: "json",
+                success: function (backdate) {
+                    var isSuccess = backdate.errorCode == "0";
+                    var resultHtml = $('#Areas');
+                    if (isSuccess) {
+
+                        resultHtml.empty();
+                        var results = backdate.result;
+                        if (results.length == 0) {
+                            resultHtml.html('<p class="warning">还没有开放城市<p/>');
+                        } else {
+                            for (var i = 0; i < results.length; i++) {
+                                var arearesult = results[i];
+                                var listr = '<li class="item-content"><div class="item-inner"><div class="item-title"><a href="index/Search.aspx?AreaCode=' + arearesult.code + '">' + arearesult.fullName + '</a></div></div></li>';
+                                resultHtml.append(listr);
+
+                            }
+                        }
+                    }
+                },
+                error: function () {
+                    alert('服务器错误');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

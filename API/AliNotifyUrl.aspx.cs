@@ -12,6 +12,7 @@ using System.Collections.Specialized;
 using System.Collections.Generic;
 using Com.Alipay;
 using LVWEIBA.Model;
+using System.IO;
 
 /// <summary>
 /// 功能：服务器异步通知页面
@@ -48,6 +49,7 @@ public partial class notify_url : System.Web.UI.Page
 
                 //商户订单号
                 openId = Request.Form["body"];
+
                 string out_trade_no = Request.Form["out_trade_no"];
 
                 //支付宝交易号
@@ -59,6 +61,7 @@ public partial class notify_url : System.Web.UI.Page
                 //总额
                 string total_fee = Request.Form["total_fee"];
 
+            
 
                 if (Request.Form["trade_status"] == "TRADE_FINISHED")
                 {
@@ -75,6 +78,7 @@ public partial class notify_url : System.Web.UI.Page
                         decimal money = decimal.Parse(total_fee) / 100;
                         LVWEIBA.DAL.order_list oodd = new LVWEIBA.DAL.order_list();
                         LVWEIBA.Model.order_list oom = oodd.GetModel(out_trade_no);
+
                         if (oom.order_zt != "DCX")
                         {
                             //正式状态

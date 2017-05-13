@@ -76,6 +76,13 @@ public partial class index_Login : System.Web.UI.Page
                 userInfoNow.openId = openid;
                 userInfoNow.name = tel;
                 BaseClass.Common.Common.UserLoginSetCookie(userInfoNow.name, this.Page, DateTime.Now.AddDays(30), userInfoNow);
+
+                HttpCookie myCookie = new HttpCookie("UserMobel");
+                myCookie.Values["Mobel"] = tel;
+                myCookie.Expires.AddDays(5);
+                Response.Cookies.Add(myCookie);
+
+
                 log4netHelper.WriteDebugLog(typeof(Login), "login", "用户登录成功：" + userInfoNow.mobile + " " + openid);
                 Response.Redirect("~/Default.aspx");
             }
@@ -177,7 +184,7 @@ public partial class index_Login : System.Web.UI.Page
             StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
             resultstr = sr.ReadToEnd();
             var apiResult = JsonConvert.DeserializeObject<BaseWebApiResponse>(resultstr);
-            if (apiResult==null)
+            if (apiResult == null)
             {
                 return result;
             }

@@ -26,7 +26,7 @@
             <div class="page">
                 <header class="bar bar-nav">
                     <a class="icon icon-left pull-left back"></a>
-                    <a href="search.html" class="icon icon-search pull-right"></a>
+                    <a href="Search.aspx" class="icon icon-search pull-right"></a>
                     <h1 class="title"><%=tpname %>列表页</h1>
                     <asp:HiddenField ID="HiddenFieldchanle" runat="server" />
                 </header>

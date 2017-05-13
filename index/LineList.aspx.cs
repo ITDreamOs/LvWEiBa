@@ -22,11 +22,11 @@ public partial class index_LineList : System.Web.UI.Page
             string s = "";
             if (filterType == "" || filterType == null)
             {
-                s = "select top 15 * from View_LvLines where kindof='" + chanle + "' and  enddate >getdate() order by id desc";
+                s = "select top 100 * from View_LvLines where kindof='" + chanle + "' and  enddate >getdate() order by id desc";
             }
             else
             {
-                s = "select top 15 * from View_LvLines where kindof='" + chanle + "' and  enddate >getdate() order by " + filterType + " desc";
+                s = "select top 100 * from View_LvLines where kindof='" + chanle + "' and  enddate >getdate() order by " + filterType + " desc";
             }
             DataSet ds = DBCLASSFORWEIXIN.DAL.DbHelperSQL.Query(s, null);
             Repeater1.DataSource = ds.Tables[0];

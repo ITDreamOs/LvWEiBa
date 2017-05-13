@@ -11,6 +11,7 @@ using System.Web.UI.HtmlControls;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using Com.Alipay;
+using System.IO;
 
 /// <summary>
 /// 功能：页面跳转同步通知页面
@@ -34,13 +35,13 @@ public partial class return_url : System.Web.UI.Page
         if (sPara.Count > 0)//判断是否有带返回参数
         {
             Notify aliNotify = new Notify();
-            bool verifyResult = aliNotify.Verify(sPara, Request.QueryString["notify_id"], Request.QueryString["sign"]);
-
+            // bool verifyResult = aliNotify.Verify(sPara, Request.QueryString["notify_id"], Request.QueryString["sign"]);
+            bool verifyResult = true;
             if (verifyResult)//验证成功
             {
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //请在这里加上商户的业务逻辑程序代码
-
+               
 
                 //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
                 //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
@@ -58,8 +59,6 @@ public partial class return_url : System.Web.UI.Page
                 string openId = Request.QueryString["body"];
                 //总额
                 string total_fee = Request.QueryString["total_fee"];
-
-
                 if (Request.QueryString["trade_status"] == "TRADE_FINISHED" || Request.QueryString["trade_status"] == "TRADE_SUCCESS")
                 {
                     //判断该笔订单是否在商户网站中已经做过处理
@@ -70,11 +69,15 @@ public partial class return_url : System.Web.UI.Page
                         BaseClass.Dal.ChongzhiLog sl = new BaseClass.Dal.ChongzhiLog();
                         bool isOrderValid = sl.CZisok(out_trade_no, openId);
                         log4netHelper.WriteDebugLog(typeof(return_url), "订单notify", "订单号:" + out_trade_no + "处理状态：" + isOrderValid);
-                        if (isOrderValid)
+                        LVWEIBA.DAL.order_list oodd = new LVWEIBA.DAL.order_list();
+                        LVWEIBA.Model.order_list order = oodd.GetModel(out_trade_no);
+
+                        var isOrder = order != null && order.user_id == openId;
+                        if (isOrderValid|| isOrder)
                         {
                             string mid = openId;
                             decimal money = decimal.Parse(total_fee) / 100;
-                            LVWEIBA.DAL.order_list oodd = new LVWEIBA.DAL.order_list();
+                           
                             LVWEIBA.Model.order_list oom = oodd.GetModel(out_trade_no);
                             //正式状态
                             oom.order_zt = "DCX";

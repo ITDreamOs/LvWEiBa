@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="indent_fill.aspx.cs" Inherits="index_indent_fill" %>
-
 <html >
 <head>
     <meta charset="utf-8">
@@ -93,7 +92,17 @@
     <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
     <script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
     <script type="text/javascript" src="js/config.js"></script>
+        <script src="index/js/jquery.cookie.js"></script>
     <script src="js/code.js"></script>
     <script type="text/javascript" src="js/passenger.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var user = localStorage.getItem('lvwei8_wx_code');
+            if (user == '') {
+                alert("还没登录");
+                location.href = 'http://www.lvwei8.com/index/login.aspx';
+            }
+        });
+    </script>
   </body>
 </html>

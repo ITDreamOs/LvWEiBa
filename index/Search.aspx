@@ -1,10 +1,10 @@
-﻿
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Search.aspx.cs" Inherits="index_Search" %>
+
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>搜索页面</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -13,24 +13,25 @@
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css">
     <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
     <link rel="stylesheet" href="css/iconfont.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css"> -->
     <link rel="stylesheet" href="css/reset.css">
+
+
+    <link href="css/weui.min.css" rel="stylesheet" />
     <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function ()
-        {
-            var areaCodes = getQueryStringByName("AreaCode");
-            $('#AreaVal').val(areaCodes);
-            //页面加载
-            var req = new AreaRequest("", $('#AreaVal').val());
-            AjaxQueryArea(req);
-            $('#BtnSearch').bind('input propertychange', function () {
-                var searchReq = new AreaRequest($('#searchInput').val(), $('#AreaVal').val());
-                AjaxQueryArea(searchReq);
-            }).bind('input input', function () {
+        $(function () {
+            //alert(1);
+            ////页面加载
+            //var req = new AreaRequest("", $('#AreaVal').val());
+            //AjaxQueryArea(req);
+            $('#BtnSearch').click(function () {
                 var searchReq = new AreaRequest($('#searchInput').val(), $('#AreaVal').val());
                 AjaxQueryArea(searchReq);
             });
+
 
         });
 
@@ -44,9 +45,8 @@
         }
 
         function GetTypeName(productTypes) {
-       var tpname = "";
-       switch (productTypes)
-            {
+            var tpname = "";
+            switch (productTypes) {
                 case "chujing":
                     tpname = "出境游";
                     break;
@@ -112,7 +112,7 @@
                         } else {
                             for (var i = 0; i < results.length; i++) {
                                 var productresult = results[i];
-                                var dateNow =  new Date();
+                                var dateNow = new Date();
                                 var date = new Date(Date.parse(productresult.sdate));
 
                                 var date3 = date.getTime() - dateNow.getTime();
@@ -122,7 +122,7 @@
                                 var leave1 = date3 % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数
                                 var hours = Math.floor(leave1 / (3600 * 1000));
                                 var sdate = days + '天' + hours + '小时';
-                                var str = '<a href="showline.aspx?code=' + productresult.proNumCode + '&lineid=' + productresult.id + '" class="picks external">  <div class="head"> ' + productresult.sdate + ' ' + productresult.splace + '出发 <div class="seat">余位<em>' + productresult.adultTicketCount + '</em></div></div><div class="box"><img src="' + productresult.linePic + '" alt=""><div class="mask">' + productresult.tTl + '<div class="price">￥' + productresult.adultzkPrice + '</div></div><div class="agio">' + productresult.adultSellPrice + ',' + productresult.adultTicketPrice + '折</div><div class="type">' +GetTypeName(productresult.kindof)+ '</div></div><div class="foot"> ' + productresult.provider + '<div class="time">剩<em>' + sdate + '</em></div></div></a>';
+                                var str = '<a href="showline.aspx?code=' + productresult.proNumCode + '&lineid=' + productresult.id + '" class="picks external">  <div class="head"> ' + productresult.sdate + ' ' + productresult.splace + '出发 <div class="seat">余位<em>' + productresult.adultTicketCount + '</em></div></div><div class="box"><img src="' + productresult.linePic + '" alt=""><div class="mask">' + productresult.tTl + '<div class="price">￥' + productresult.adultzkPrice + '</div></div><div class="agio">' + (10 * productresult.adultzkPrice / productresult.adultTicketPrice).toFixed(1) + '折</div><div class="type">' + GetTypeName(productresult.kindof) + '</div></div><div class="foot"> ' + productresult.provider + '<div class="time">剩<em>' + sdate + '</em></div></div></a>';
                                 resultHtml.append(str);
 
                             }
@@ -147,22 +147,33 @@
                 <a class="icon icon-left pull-left back"></a>
                 <h1 class='title'>搜索页面</h1>
             </header>
-            <div class="bar bar-header-secondary">
-                <div class="searchbar">
-                    <a class="searchbar-cancel">取消</a>
-                    <div class="search-input">
-                        <label class="icon icon-search" for="search" id="BtnSearch"></label>
-                        <input type="search" id='searchInput' placeholder='输入关键字...' />
-                        <input type="hidden" id="AreaVal" />
+            
+
+            <div class="content">
+                    <div class="filter clearfix">
+                         <div class="row">
+                    <div class=" col-60">    <input type="text" class=" form-control" id="searchInput" placeholder="输入关键字.." /></div>
+                    <div class=" col-15">      <input type="button" class=" form-control btn-warning" id="BtnSearch" value="搜索" /></div> 
+                </div>  
+                    </div>
+                 
+                <input type="hidden" id="AreaVal" value="<%#ViewState["AreaCode"].ToString()%>" />
+                <input type="hidden" runat="server" value="" id="IsFirst" />
+                <div class="row">
+                    <div class="pick" id="Areas">
+                        <%if ((bool)ViewState["IsFirst"])
+                            {
+                                var list = (List<LvULinesViewModel>)ViewState["List"];
+                                var str = "";
+                                foreach (var item in list)
+                                {
+                                    str += @"<a href='showline.aspx?code=" + item.ProNumCode + "&lineid=" + item.id + "' class='picks external'><div class='head'>" + (item.Sdate + "" + item.Splace) + "出发<div class='seat'>余位<em>" + item.adultTicketCount + "</em></div></div><div class='box'><img src='" + item.LinePic + "' alt=''><div class='mask'>" + item.TTl.ToString() + "<div class='price'>￥" + item.adultzkPrice + "</div></div><div class='agio'>" + zhekou(item.adultzkPrice.ToString(), item.adultTicketPrice.ToString()) + "折</div><div class='type'>" + typeget(item.Kindof) + "</div></div><div class='foot'>" + item.Provider + "<div class='time'>剩<em>" + Diffdatebynow(item.Enddate.ToString()) + "</em></div></div></a>";
+                                }
+                                Response.Write(str);
+                            };%>
                     </div>
                 </div>
-            </div>
-            <div class="content">
 
-                <div class="pick" id="Areas">
-
-
-                </div>
             </div>
             <!-- content -->
 

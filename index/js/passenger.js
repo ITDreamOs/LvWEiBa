@@ -46,7 +46,7 @@ function getPassengerData() {
     data: {
       param: param
     }
-  }, function(res) {
+  }, function (res) {
     if (res.errorMessage) {
       if (res.errorMessage.match('Exception')) alert('创建订单失败');
       else alert(res.errorMessage);

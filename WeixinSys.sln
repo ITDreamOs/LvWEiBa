@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseClass.Bll", "..\BaseCla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LvWeiBa.WebAPI", "..\LvWeiBa.WebAPI\LvWeiBa.WebAPI.csproj", "{16780CE5-44FA-4E1B-80CC-621BD3062C3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMigrate", "DataMigrate\DataMigrate.csproj", "{08C37B81-99E0-4434-98E4-06AB7AE7B92E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{16780CE5-44FA-4E1B-80CC-621BD3062C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16780CE5-44FA-4E1B-80CC-621BD3062C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16780CE5-44FA-4E1B-80CC-621BD3062C3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08C37B81-99E0-4434-98E4-06AB7AE7B92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C37B81-99E0-4434-98E4-06AB7AE7B92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C37B81-99E0-4434-98E4-06AB7AE7B92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C37B81-99E0-4434-98E4-06AB7AE7B92E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,6 +8,7 @@ using System.Data;
 using System.Text;
 using WeixinApiClass;
 using LVWEIBA.Model;
+using BaseClass.Dal;
 
 public partial class index_indent_type : System.Web.UI.Page
 {
@@ -34,8 +35,16 @@ public partial class index_indent_type : System.Web.UI.Page
     {
         string order = "";
         var bll = new LVWEIBA.DAL.order_list();
-        string sql = " and user_id='" + openid + "'";
-        DataTable list = bll.GetList(" 1=1 " + sql).Tables[0];
+        var sb = string.Format(@" select b.*,LvULinesSpic.Spic from (select order_Mx.productNum, LocalWeixinUser.nickname, order_list.order_sj, order_list.order_zt, order_list.order_Price, order_Mx.ProCount, order_list.order_id, LocalWeixinUser.openid as user_id
+ from order_list
+left join LocalWeixinUser on order_list.user_id = LocalWeixinUser.openid
+left
+ join order_Mx on order_Mx.order_id = order_list.order_id
+where user_id = '{0}') b left join LvULinesSpic ON b.productNum = LvULinesSpic.ProNumCode;", openid);
+        var list = SQLHelper.GetDataTable(CommandType.Text, sb.ToString(), null);
+           
+        //string sql = " and user_id='" + openid + "'";
+        //DataTable list = bll.GetList(" 1=1 " + sql).Tables[0];
         StringBuilder strWzf = new StringBuilder();
         StringBuilder strDcx = new StringBuilder();
         StringBuilder strYwc = new StringBuilder();
